@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:central_de_eventos/screens/form_cadastro.dart';
+import 'package:central_de_eventos/global.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -9,8 +10,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,9 +57,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: ElevatedButton(
                   child: const Text('Login'),
                   onPressed: () {
-                    // print(emailController.text);
-                    // print(passwordController.text);
-
+                    FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
+                    print(emailController.text);
+                    print(passwordController.text);
                   },
                 )
             ),

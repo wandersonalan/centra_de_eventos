@@ -12,6 +12,19 @@ class FormPage extends StatefulWidget {
 class _FormPageState extends State<FormPage> {
   final _formKey = GlobalKey<FormState>();
 
+  // @override
+  // void dispose() {
+  //   emailController.dispose();
+  //   passwordController.dispose();
+  //   nameController.dispose();
+  //   phoneController.dispose();
+  //   super.dispose();
+  // }
+String nome = "";
+String email = "";
+String tel = "";
+String senha = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,13 +43,19 @@ class _FormPageState extends State<FormPage> {
                 validator: (val) {
                   if (!val!.isValidName) {
                     return 'Insira um nome válido';
+                  } else {
+                    nome = val;
                   }
                 },
               ),
               CustomFormField(
                 hintText: 'Email',
                 validator: (val) {
-                  if (!val!.isValidEmail) return 'Insira um e-mail válido';
+                  if (!val!.isValidEmail) {
+                    return 'Insira um e-mail válido';
+                  } else {
+                    email = val;
+                  }
                 },
               ),
               CustomFormField(
@@ -46,22 +65,30 @@ class _FormPageState extends State<FormPage> {
                     RegExp(r"[0-9]"),
                   )
                 ],
-                // validator: (val) {
-                //   if (!val!.isValidPhone) return 'Enter valid phone';
-                // },
+                validator: (val) {
+                  if (!val!.isValidPhone) {
+                    return 'Insira um telefone válido';
+                  } else {
+                    tel = val;
+                  }
+                },
               ),
               CustomFormField(
                 hintText: 'Senha',
-                // validator: (val) {
-                //   if (!val!.isValidPassword) return 'Enter valid password';
-                // },
+                validator: (val) {
+                  if (!val!.isValidPassword) {
+                    return 'Insira um password válido';
+                  } else {
+                    senha = val;
+                  }
+                },
               ),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     FirebaseAuth.instance.createUserWithEmailAndPassword(
-                        email: "joao@joao.com.br",
-                        password: "123456"
+                        email: email,
+                        password: senha
                     );
                     // Navigator.of(context).push(
                     //   MaterialPageRoute(

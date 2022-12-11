@@ -17,10 +17,10 @@ class CustomFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        controller: emailController,
         inputFormatters: inputFormatters,
         validator: validator,
         decoration: InputDecoration(hintText: hintText),
