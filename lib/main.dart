@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:central_de_eventos/screens/splash_screen.dart';
@@ -7,9 +8,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-
-  });
+  // FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+  // });
   // firebaseMessaging.configure(
   //   onMessage: (Map<String, dynamic> message) async {
   //     print("onMessage: $message");

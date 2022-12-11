@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:central_de_eventos/global.dart';
 
 class CustomFormField extends StatelessWidget {
 

@@ -1,29 +1,24 @@
 import 'package:central_de_eventos/screens/verifica_campos.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:central_de_eventos/valida_entrada_form.dart';
+import 'package:central_de_eventos/screens/lista_eventos.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({Key? key}) : super(key: key);
   @override
   _FormPageState createState() => _FormPageState();
 }
-class _FormPageState extends State<FormPage> {
-  final _formKey = GlobalKey<FormState>();
 
-  // @override
-  // void dispose() {
-  //   emailController.dispose();
-  //   passwordController.dispose();
-  //   nameController.dispose();
-  //   phoneController.dispose();
-  //   super.dispose();
-  // }
 String nome = "";
 String email = "";
 String tel = "";
 String senha = "";
+
+class _FormPageState extends State<FormPage> {
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -86,16 +81,34 @@ String senha = "";
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    FirebaseAuth.instance.createUserWithEmailAndPassword(
-                        email: email,
-                        password: senha
-                    );
-                    // Navigator.of(context).push(
-                    //   MaterialPageRoute(
-                    //     builder: (_) => SuccessPage(),
-                    //   ),
-                    // );
-                  }
+                    FirebaseAuth
+                        .instance
+                        .createUserWithEmailAndPassword(
+                          email: email,
+                          password: senha
+                        );
+                    Map<String, dynamic> usuario;
+                    FirebaseFirestore
+                        .instance
+                        .collection("usuario")
+                        .add(usuario = <String, dynamic>{
+                          "nome": nome,
+                          "email": email,
+                          "tel": tel
+                         });
+                    FirebaseAuth.instance
+                        .authStateChanges()
+                        .listen((User? user) {
+                      if (user != null) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => ListaEventos(),
+                          ),
+                        );
+                        print(user.uid);
+                      }
+                  });
+                };
                 },
                 child: const Text('Cadastrar'),
               )
@@ -106,3 +119,4 @@ String senha = "";
     );
   }
 }
+

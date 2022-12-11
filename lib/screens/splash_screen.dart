@@ -1,8 +1,8 @@
 import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:central_de_eventos/screens/login_screen.dart';
+import 'package:central_de_eventos/screens/lista_eventos.dart';
 
 class SplashScreen extends StatefulWidget{
   @override
@@ -28,7 +28,7 @@ class _SplashScreen extends State<SplashScreen>{
           Navigator.pushReplacement(context, MaterialPageRoute(
               builder: (context) {
                 print ("está logado");
-                return LoginScreen();
+                return ListaEventos();
               })
           );
         }

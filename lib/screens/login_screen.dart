@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:central_de_eventos/screens/form_cadastro.dart';
-import 'package:central_de_eventos/global.dart';
+import 'package:central_de_eventos/screens/lista_eventos.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -11,10 +11,12 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
 
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Material(
-        // padding: const EdgeInsets.all(10),
         child: ListView(
           children: <Widget>[
             Container(
@@ -45,21 +47,36 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            TextButton(
-              onPressed: () {
-                //forgot password screen
-              },
-              child: const Text('Esqueci a senha',),
-            ),
             Container(
                 height: 50,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 child: ElevatedButton(
                   child: const Text('Login'),
-                  onPressed: () {
-                    FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
-                    print(emailController.text);
-                    print(passwordController.text);
+                  onPressed: () async {
+                    try {
+                      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+                          email: emailController.text,
+                          password: passwordController.text
+                      );
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'user-not-found') {
+                        print('Usuário não localizado para o email');
+                      } else if (e.code == 'wrong-password') {
+                        print('Senha inválida');
+                      }
+                    }
+                    FirebaseAuth.instance
+                        .authStateChanges()
+                        .listen((User? user) {
+                      if (user != null) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => ListaEventos(),
+                          ),
+                        );
+                        print(user.uid);
+                      }
+                    });
                   },
                 )
             ),
@@ -85,3 +102,4 @@ class _LoginScreenState extends State<LoginScreen> {
         ));
   }
 }
+
