@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "289582591982",
+    "project_id": "central-de-eventos-4ec91",
+    "storage_bucket": "central-de-eventos-4ec91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289582591982:android:b0ebf336b95161de8f28ff",
+        "android_client_info": {
+          "package_name": "com.example.central_de_eventos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "289582591982-l073jvhdi1h0bemueu93p1sscjc73cis.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbUZtvY_O9QgRN22XYlVdkeyT6e3n5CLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "289582591982-l073jvhdi1h0bemueu93p1sscjc73cis.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "289582591982-f52t9734oarg2rsi7htpism88rn97f8a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.centralDeEventos"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
