@@ -42,6 +42,7 @@ dependencies:
   google_sign_in: ^5.4.2
   firebase_messaging:
   cloud_firestore:
+  intl:
 
 dev_dependencies:
   flutter_test:

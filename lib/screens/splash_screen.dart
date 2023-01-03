@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:central_de_eventos/screens/login_screen.dart';
 import 'package:central_de_eventos/screens/lista_eventos.dart';
+import 'form_evento.dart';
 
 class SplashScreen extends StatefulWidget{
   @override
@@ -15,6 +16,8 @@ class _SplashScreen extends State<SplashScreen>{
   @override
   void initState() {
     super.initState();
+    dateinput.text = "";
+
       Timer(const Duration(seconds: 5), () {
         if (FirebaseAuth.instance.currentUser == null) {
           Navigator.pushReplacement(context, MaterialPageRoute(
